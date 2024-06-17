@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static './styles/safari_homepage.css' %}">
+    <title>Safari Homepage</title>
+</head>
+<body>
+    <header>
+        <div>
+            <h1>Welcome User {{safari_user.first_name}} {{safari_user.last_name}}</h1>
+        </div>
+        <div>
+            <a href="{% url 'logout' %}">Log out</a>
+        </div>
+    </header>
+    <main>
+        {% for safari_course in safari_courses %}
+            <div class="course-div">
+                <div>
+                    <img style="max-width: 100%; width: 100px; height: 100px;" src="{% static 'course_image/' %}{{safari_course.file_name}}" alt="{{safari_course.file_name}} pic">
+                </div>
+                <div>
+                    {{safari_course.course_name}}
+                </div>
+                <div>
+                    <a href="{{safari_course.course_link}}" target="_blank">Course {{forloop.counter}} Link</a>
+                </div>
+            </div>
+        {% endfor %}
+    </main>
+</body>
+</html>
