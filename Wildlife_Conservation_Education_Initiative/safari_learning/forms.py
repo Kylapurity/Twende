@@ -1,7 +1,8 @@
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
 from .models import SafariUser
-from .models import validate_age
+from django.forms import ModelForm
+from .models import SafariUser, Event
 
 # define the UserCreationForm  for the safari users to register with
 class SafariUserCreationForm(UserCreationForm):
@@ -28,3 +29,13 @@ The AuthenticationForm provides two fields:
 """
 class SafariUserAuthenticationForm(AuthenticationForm):
     pass
+
+class SafariForm(ModelForm):
+    class Meta:
+        model = SafariUser
+        fields = ["username", "email"]
+
+class EventForm(ModelForm):
+    class Meta:
+        model = Event
+        fields = ["event_name"]
