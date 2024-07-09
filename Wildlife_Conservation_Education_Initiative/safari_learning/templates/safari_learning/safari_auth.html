@@ -1,121 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     {% load static %}
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-        integrity="sha512-Fo3rlrQkTyCp3c50U4q1g3u8NdEcZg7Mr8KIM6yyU/Gl6bgD/dO5eE1lg9i8AaT/mTVS8o0p2O5yD60XD9t+pg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'styles/safari_auth.css' %}">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />     -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'styles/safari_auth.css' %}" />
     <title>Safari Learning</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="container">
+      <div>
+        {% if safari_form_errors %}
+          {% if safari_signup_form.errors %}
+            <div>
+              <p class="safari-signup">{{ safari_form_errors }}</p>
+              <!-- Hovering the p tag displays the div with an hint message -->
+              <div class="safari-signup signup-error-div"></div>
+            </div>
+          {% elif safari_login_form.errors %}
+            <div>
+              <p class="safari-login">{{ safari_form_errors }}</p>
+              <!-- Hovering the p tag displays the div with an hint message -->
+              <div class="safari-login login-error-div"></div>
+            </div>
+          {% endif %}
+        {% endif %}
+      </div>
+      <div class="auth_div">
+        <div class="auth_child_div {% if safari_login_form %} auth_active {% endif %}">
+          <a href="{% url 'safari:login' %}" class="login-event">Login</a>
+        </div>
+
+        <div class="auth_child_div {% if safari_signup_form %} auth_active {% endif %}">
+          <a href="{% url 'safari:signup' %}" class="signup-event">Signup</a>
+        </div>
+      </div>
+      <form method="POST">
+        {% csrf_token %}
         <div>
-            {% if safari_form_errors %}
-            {% if safari_signup_form.errors %}
-            <div>
-                <p class="safari-signup">{{safari_form_errors}}</p>
-                <!--Hovering the p tag displays the div with an hint message-->
-                <div class="safari-signup signup-error-div"></div>
-            </div>
-            {% elif safari_login_form.errors %}
-            <div>
-                <p class="safari-login">{{safari_form_errors}}</p>
-                <!--Hovering the p tag displays the div with an hint message-->
-                <div class="safari-login login-error-div"></div>
-            </div>
-            {% endif %}
-            {% endif %}
-        </div>
-        <div class="auth_div">
-            <div class="animation-div"><a href="{% url 'safari:login' %}" class="login-event">Login</a>
-                <div class="{% if safari_login_form %}{{animation}}{% endif %}"></div>
-            </div>
+          {% if safari_signup_form %}
+            <section id="sign-up-container">
+              <div class="form-group signup">{{ safari_signup_form.first_name.label_tag }}
+                {{ safari_signup_form.first_name }}</div>
+              <div class="form-group signup">{{ safari_signup_form.last_name.label_tag }}
+                {{ safari_signup_form.last_name }}</div>
+              <div class="form-group signup">
+                {{ safari_signup_form.username.label_tag }}
+                {{ safari_signup_form.username }}
+                {% if safari_signup_form.errors %}
+                  <p>{{ safari_signup_form.errors.username }}</p>
+                {% endif %}
+              </div>
+              <div class="form-group signup">
+                {{ safari_signup_form.email.label_tag }}
+                {{ safari_signup_form.email }}
+                {% if safari_signup_form.errors %}
+                  <p>{{ safari_signup_form.errors.email }}</p>
+                {% endif %}
+              </div>
 
-            <div class="animation-div"><a href="{% url 'safari:signup' %}" class="signup-event">Signup</a>
-                <div class="{% if safari_signup_form %}{{animation}}{% endif %}"></div>
-            </div>
+              <div class="form-group signup">
+                {{ safari_signup_form.age.label_tag }}
+                {{ safari_signup_form.age }}
+                {% if safari_signup_form.errors %}
+                  <p>{{ safari_signup_form.errors.age }}</p>
+                {% endif %}
+              </div>
+              <div class="form-group signup">{{ safari_signup_form.profession.label_tag }}
+                {{ safari_signup_form.profession }}</div>
+
+              <div class="form-group signup">{{ safari_signup_form.password1.label_tag }}
+                {{ safari_signup_form.password1 }}</div>
+              <div class="form-group signup">
+                {{ safari_signup_form.password2.label_tag }}
+                {{ safari_signup_form.password2 }}
+                {% if safari_signup_form.errors %}
+                  <p>{{ safari_signup_form.errors.password2 }}</p>
+                {% endif %}
+              </div>
+            </section>
+          {% endif %}
+          <!-- Separating safari signup from safari login -->
+          {% if safari_login_form %}
+            <section id="login-container">
+              <div class="form-group login">{{ safari_login_form.username.label_tag }}
+                {{ safari_login_form.username }}</div>
+              <div class="form-group login">{{ safari_login_form.password.label_tag }}
+                {{ safari_login_form.password }}</div>
+            </section>
+          {% endif %}
         </div>
-        <form method="POST">
-            {% csrf_token %}
-            <div>
-                {% if safari_signup_form %}
-                <div class="form-group signup">
-                    {{safari_signup_form.first_name.label_tag}}
-                    {{safari_signup_form.first_name}}
-                </div>
-                <div class="form-group signup">
-                    {{safari_signup_form.last_name.label_tag}}
-                    {{safari_signup_form.last_name}}
-                </div>
-                <div class="form-group signup">
-                    {{safari_signup_form.username.label_tag}}
-                    {{safari_signup_form.username}}
-                    {% if safari_signup_form.errors %}
-                    <p>{{safari_signup_form.errors.username}}</p>
-                    {% endif %}
-                </div>
-                <div class="form-group signup">
-                    {{safari_signup_form.email.label_tag}}
-                    {{safari_signup_form.email}}
-                    {% if safari_signup_form.errors %}
-                    <p>{{safari_signup_form.errors.email}}</p>
-                    {% endif %}
-                </div>
-                <div class="form-group signup">
-                    {{safari_signup_form.age.label_tag}}
-                    {{safari_signup_form.age}}
-                    {% if safari_signup_form.errors %}
-                    <p>{{safari_signup_form.errors.age}}</p>
-                    {% endif %}
-                </div>
-                <div class="form-group signup">
-                    {{safari_signup_form.profession.label_tag}}
-                    {{safari_signup_form.profession}}
-                </div>
-                <div class="form-group signup">
-                    {{safari_signup_form.password1.label_tag}}
-                    {{safari_signup_form.password1}}
-                </div>
-                <div class="form-group signup">
-                    {{safari_signup_form.password2.label_tag}}
-                    {{safari_signup_form.password2}}
-                    {% if safari_signup_form.errors %}
-                    <p>{{safari_signup_form.errors.password2}}</p>
-                    {% endif %}
-                </div>
-                {% endif %}
-                <!-- Separating safari signup from safari login-->
-                {% if safari_login_form %}
-                <div class="form-group login">
-                    {{safari_login_form.username.label_tag}}
-                    {{safari_login_form.username}}
-                </div>
-                <div class="form-group login">
-                    {{safari_login_form.password.label_tag}}
-                    {{safari_login_form.password}}
-                </div>
-                {% endif %}
-            </div>
-            <div class="form-group">
-                <button type="submit">
-                    {% if safari_signup_form %}
-                    Sign Up
-                    {% else %}
-                    Login
-                    {% endif %}
-                </button>
-            </div>
-        </form>
+        <div class="form-group" style="margin-top: 20px;">
+          <button type="submit" class="submit">
+            {% if safari_signup_form %}
+              Sign Up
+            {% else %}
+              Login
+            {% endif %}
+          </button>
+        </div>
+      </form>
     </div>
-</body>
-<script src="{% static 'scripts/safari_auth.js' %}"></script>
-
+  </body>
+  <script src="{% static 'scripts/safari_auth.js' %}"></script>
 </html>

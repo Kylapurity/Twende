@@ -11,8 +11,8 @@
     <title>Safari Homepage</title>
 </head>
 <body>
-    <header>
-        <div>
+    <header class="header">
+        <div class="title">
             <h1>Welcome User {{safari_user.first_name}} {{safari_user.last_name}}</h1>
         </div>
         <div>
@@ -20,7 +20,8 @@
         </div>
     </header>
     <main>
-        {% for safari_course in safari_courses %}
+        <section class="courses">
+            {% for safari_course in safari_courses %}
             <div class="course-div">
                 <div>
                     <img style="max-width: 100%; width: 100px; height: 100px;" src="{% static 'course_image/' %}{{safari_course.file_name}}" alt="{{safari_course.file_name}} pic">
@@ -33,6 +34,8 @@
                 </div>
             </div>
         {% endfor %}
+        </section>
+       
     </main>
 </body>
 </html>

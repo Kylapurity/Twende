@@ -1,117 +1,170 @@
-*{
+* {
     font-family: "Quicksand", sans-serif;
     font-optical-sizing: auto;
     font-weight: 300;
     font-style: normal;
-  }
+}
 
-  body {
-      background-color: #181818;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      color: #fff;
-  }
-  
-  .container {
-      display: flex;
-      flex-direction: column;
-      flex-wrap: wrap;
-      background-color: #222;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-      width: 300px;
-  }
-  
-  .container h2 {
-      text-align: center;
-      margin-bottom: 20px;
-  }
-  
-  .auth_div {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-  }
-  
-  .animation {
-      display: inline-block;
-      /* background: rgba(0, 123, 255, 1); */
-      width: 160px;
-      height: 70px;
-  }
-  
-  .animation-div {
-      display: flex;
-      flex-direction: row;
-      width: 120px;
-      height: 20px;
-      text-align: center;
-  }
-  .form-group {
-      margin-bottom: 15px;
-  }
-  
-  .form-group label {
-      display: block;
-      margin-bottom: 5px;
-  }
-  
-  .form-group input {
-      margin-bottom: 1.25rem;
-      border-radius: 0.625rem;
-      width: 100%;
-      padding: 0.75rem 1.25rem;
-      box-sizing: border-box;
-      font-size: 0.875rem;
-      border: 1px solid #292929;
-      outline: none;
-      background: #36373B;
-  }
-  
-  .form-group input:focus, .form-group input:active {
-      border: 3px solid #1d4a77;
-      background-color: #2e2e2e;
-  }
-  
-  .form-group button {
-      width: 100%;
-      padding: 10px;
-      background-color: #007bff;
-      border: none;
-      border-radius: 10px;
-      color: #fff;
-      cursor: pointer;
-  }
-  
-  .form-group button:hover {
-      background-color: #0056b3;
-  }
-  
-  .link {
-      display: block;
-      text-align: center;
-      margin-top: 10px;
-  }
-  
-  .mltr {
-      position: relative;
-      right: 50px;
-      width: 49.75px;
-      height: 20px;
-  }
-  
-  .login-event {
-      /* background-color: #007bff; */
-      width: 49.75px;
-  }
-  
-  .left-to-right {
-      animation-duration: 3s;
-      animation-name: moveLeftToRight;
-      animation-fill-mode: forwards;
-  }
+body {
+    background-image: url(https://cdn.educba.com/academy/wp-content/uploads/2024/03/Essay-on-Wildlife-Conservation.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    color: #fff;
+}
+
+
+
+/*Container*/
+.container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    background-color: #292929 !important;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 500px;
+    margin-top: 100px;
+    opacity: .85;
+    margin-bottom: 5px;
+}
+
+.container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.auth_div {
+    display: flex;
+    justify-content: space-between;
+    opacity: 1;
+}
+.auth_child_div{
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    padding: 10px;
+    border-bottom: 1px solid #fefe;
+}
+.auth_active {
+    padding: 10px;
+    width: 100%;
+    background-color: #0a9a52;
+    border-bottom: none;
+    border-radius: 21px;
+}
+
+
+/*Group Style*/
+.form-group {
+    padding-bottom: 1px;
+}
+
+.form-group label {
+    display: block;
+
+}
+
+.form-group input {
+    border-radius: 0.625rem;
+    width: 100%;
+    padding: 0.45rem 1.25rem;
+    box-sizing: border-box;
+    font-size: 1.25rem;
+    font-weight: 500;
+    border: 1px solid #292929;
+    outline: none;
+    color: #f7f3f3;
+    background: #6b6c72;
+}
+
+.form-group input:focus,
+.form-group input:active {
+    border: 3px solid #1d4a77;
+    background-color: #aaa9a9;
+    color: #f7f3f3;
+}
+
+.form-group button {
+    width: 100%;
+    padding: 10px;
+    background-color: #0a9a52;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+}
+btn .submit{
+    margin-top: 20px;
+}
+
+.form-group button:hover {
+    background-color: #11c119;
+}
+
+.form-group label {
+    display: block;
+    padding-bottom: 5px;
+    padding-top: 10px;
+    font-size: 18px;
+}
+
+
+/*logIn Style*/
+.login-event {
+    width: 49.75px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: 400;
+}
+
+.login-event:hover {
+    color: #5f8356;
+}
+
+.left-to-right {
+    animation-duration: 3s;
+    animation-name: moveLeftToRight;
+    animation-fill-mode: forwards;
+}
+
+/*Sign-Up*/
+.signup-event {
+    width: 49.75px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: 400;
+}
+
+.signup-event:hover {
+    color: #5f8356;
+}
+
+/*Buuton*/
+.submit {
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+
+#sign-up-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 15px;
+    margin: 20px 10px;
+}
+
+#login-container{
+    display: grid;
+    grid-template-columns: auto;
+    gap: 25px;
+    margin: 20px 10px;
+}

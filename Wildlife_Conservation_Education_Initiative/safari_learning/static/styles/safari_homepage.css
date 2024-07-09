@@ -25,3 +25,6 @@ main {
     flex-grow: 2;
     flex-shrink: 1;
 }
+.courses{
+    display: grid;
+}
