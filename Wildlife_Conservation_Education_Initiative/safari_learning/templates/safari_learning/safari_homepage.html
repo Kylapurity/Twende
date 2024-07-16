@@ -1,44 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     {% load static %}
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static './styles/safari_homepage.css' %}">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet" />
+    {% comment %} <link rel="stylesheet" href="{% static './styles/safari_homepage.css' %}" /> {% endcomment %}
     <title>Safari Homepage</title>
-</head>
-<body>
-    <header class="header">
-        <div class="title">
-            <h1>Welcome User {{safari_user.first_name}} {{safari_user.last_name}}</h1>
-        </div>
-        <div>
-            <a href="{% url 'logout' %}">Log out</a>
-        </div>
-        <div>
-            <a href="{% url 'safari:landing_page' %}">Landing Page</a>
-        </div>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+      }
+      header {
+        background-color: #0b2d01;
+        color: #fff;
+        padding: 10px 0;
+        text-align: center;
+      }
+      nav {
+        display: flex;
+        justify-content: center;
+        background-color: #2e7918;
+        padding: 10px;
+      }
+      nav a {
+        color: white;
+        text-decoration: none;
+        margin: 0 15px;
+        font-weight: bold;
+        padding: 10px;
+        border-radius: 5px;
+      }
+      nav a:hover {
+        background-color: #0b2d01;
+        color: #fff;
+      }
+      nav a:active {
+        background-color: #0b2d01;
+        color: #fff;
+      }
+      
+      .user-info {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin: 20px auto;
+        max-width: 600px;
+      }
+      .interests {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 20px;
+      }
+      .interest {
+        margin: 10px;
+        padding: 10px 20px;
+        border-radius: 15px;
+        background-color: #2e7918;
+        color: white;
+        font-weight: bold;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background: linear-gradient(145deg, #4caf50, #388e3c);
+        transition: transform 0.2s;
+        flex: 1;
+      }
+      .interest:hover {
+        transform: scale(1.1);
+      }
+      
+      .courses {
+        display: grid;
+        grid-gap: 10px;
+        grid-template-columns: repeat(4, 1fr);
+        border-radius: 5px;
+        padding: 5px;
+      }
+      
+      .course-div {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        align-content: center;
+        gap: 8px;
+        justify-content: space-between;
+  
+        
+      }
+      a {
+        color: inherit;
+        text-decoration: inherit;
+      }
+      
+      .container {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 20px;
+      }
+      @media (min-width: 640px) {
+        .container {
+          max-width: 640px;
+        }
+      }
+      @media (min-width: 768px) {
+        .container {
+          max-width: 768px;
+        }
+      }
+      @media (min-width: 1024px) {
+        .container {
+          max-width: 1024px;
+        }
+      }
+      @media (min-width: 1280px) {
+        .container {
+          max-width: 1280px;
+        }
+      }
+      @media (min-width: 1536px) {
+        .container {
+          max-width: 1536px;
+        }
+      }
+      
+      footer {
+        background-color: #2e7918;
+        color: #fff;
+        text-align: center;
+        padding: 10px 0;
+        position: absolute;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Welcome to Safari User Portal</h1>
     </header>
-    <main>
-        <section class="courses">
-            {% for safari_course in safari_courses %}
-            <div class="course-div">
-                <div>
-                    <img style="max-width: 100%; width: 100px; height: 100px;" src="{% static 'course_image/' %}{{safari_course.file_name}}" alt="{{safari_course.file_name}} pic">
-                </div>
-                <div>
-                    {{safari_course.course_name}}
-                </div>
-                <div>
-                    <a href="{{safari_course.course_link}}" target="_blank">Course {{forloop.counter}} Link</a>
-                </div>
+    <nav>
+      <a href="{% url 'safari:homepage' %}">Courses</a>
+      {% comment %} <a href="{% url 'safari:interests' logged_in_user.id %}">Interests</a> {% endcomment %}
+      <a href="{% url 'safari:book_event' %}">Book Event</a>
+      <a href="{% url 'safari:faq_page' %}">FAQ</a>
+
+      <a href="{% url 'logout' %}">Log out</a>
+
+      <a href="{% url 'safari:landing_page' %}">Landing Page</a>
+    </nav>
+
+    <main class="container">
+      <section class="courses">
+        {% for safari_course in safari_courses %}
+          <article class="course-div">
+            <img style="max-width: 100%; width: 100px; height: 100px;" src="{% static 'course_image/' %}{{ safari_course.file_name }}" alt="{{ safari_course.file_name }} pic" />
+            <div class="info">
+              <p>{{ safari_course.course_name }}</p>
+              <a href="{{ safari_course.course_link }}" target="_blank">View Course {{ forloop.counter }}</a>
             </div>
+          </article>
         {% endfor %}
-        </section>
-       
+      </section>
     </main>
-</body>
+
+    <footer>
+      <p>&copy; 2024 Safari User Portal. All rights reserved.</p>
+    </footer>
+  </body>
 </html>

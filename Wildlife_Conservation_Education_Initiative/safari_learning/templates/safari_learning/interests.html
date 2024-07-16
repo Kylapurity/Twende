@@ -1,166 +1,261 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     {% load static %}
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://kit.fontawesome.com/95cc5340fb.js" crossorigin="anonymous"></script>
     <title>Interest Update</title>
-</head>
-
-<body>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+      }
+      header {
+        background-color: #0b2d01;
+        color: #fff;
+        padding: 10px 0;
+        text-align: center;
+      }
+      nav {
+        display: flex;
+        justify-content: center;
+        background-color: #2e7918;
+        padding: 10px;
+      }
+      nav a {
+        color: white;
+        text-decoration: none;
+        margin: 0 15px;
+        font-weight: bold;
+        padding: 10px;
+        border-radius: 5px;
+      }
+      nav a:hover {
+        background-color: #555;
+        color: #fff;
+      }
+      nav a:active {
+        background-color: #666;
+        color: #fff;
+      }
+      .container {
+        padding: 20px;
+        text-align: center;
+      }
+      .user-info {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin: 20px auto;
+        max-width: 600px;
+      }
+      .interests {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 20px;
+      }
+      .interest {
+        margin: 10px;
+        padding: 10px 20px;
+        border-radius: 15px;
+        background-color: #007bff;
+        color: white;
+        font-weight: bold;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background: linear-gradient(145deg, #007bff, #0056b3);
+        transition: transform 0.2s;
+        flex: 1;
+      }
+      .interest:hover {
+        transform: scale(1.1);
+      }
+      .user_interest_btn {
+        margin-bottom: 0.5rem;
+        margin-right: 0.5rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: 0.5rem;
+        border: 1px solid #c0c0c0;
+        background-color: #ffffff;
+        font-size: 0.75rem;
+        text-transform: capitalize;
+        padding: 4px 2px 4px 3.5px;
+      }
+      .user_interest_span {
+        line-height: 1.25rem;
+        display: inline;
+      }
+      
+      footer {
+        background-color: #2e7918;
+        color: #fff;
+        text-align: center;
+        padding: 10px 0;
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Welcome to Safari User Portal</h1>
+    </header>
+    <nav>
+      <a href="{% url 'safari:homepage' %}">Home</a>
+      <a href="{% url 'safari:interests' logged_in_user.id %}">Interests</a>
+      <a href="{% url 'safari:book_event' %}">Book Event</a>
+      <a href="{% url 'safari:faq_page' %}">FAQ</a>
+    </nav>
     <div>
-        <a href="{% url 'safari:landing_page' %}">Landing Page</a>
+      <a href="{% url 'safari:landing_page' %}">Landing Page</a>
     </div>
     {% if all_interests %}
-    <main>
+      <main>
         {% if user_interests %}
-        <div>
+          <div>
             {% for each_interest_obj in all_interests %}
-                {% if each_interest_obj.interest in user_interests %}
-                    <div id="div_user_interest_{{forloop.counter}}">
-                        <span onclick="postRequest(event)"
-                            id="user_interest_{{forloop.counter}}"
-                            style="width: 100px; height: 40px; background-color: #6cf56c; color: white; border: 1px solid black; border-radius: 5px;">
-                            {{each_interest_obj.interest}}
-                        </span>
-                        <i class="fa-solid fa-circle-xmark" id="{{forloop.counter}}" style="font-size: 25px;" onclick="deleteRequest(event)"></i>
-                    </div>
-                {% else  %}
-                    <div id="div_user_interest_{{forloop.counter}}">
-                        <span onclick="postRequest(event)"
-                            id="user_interest_{{forloop.counter}}"
-                            style="width: 100px; height: 40px; background-color: #f53b3b; color: rgb(0, 0, 0);border: 1px solid black; border-radius: 5px;">
-                            {{each_interest_obj.interest}}
-                        </span>
-                    </div>
-                {% endif %}
+              {% if each_interest_obj.interest in user_interests %}
+                <button type="button" class="user_interest_btn" onclick="postRequest(event)" id="div_user_interest_{{ forloop.counter }}" >
+                  <span class="user_interest_span" id="user_interest_{{ forloop.counter }}"
+                  style="background-color: #6cf56c; color: white;">
+                      {{ each_interest_obj.interest }}
+                      </span>
+                    <i class="fa-solid fa-circle-xmark" id="{{ forloop.counter }}" style="margin-left:10px; font-size: 20px;" onclick="deleteRequest(event)"></i>
+                </button>
+              {% else %}
+                <button type="button" class="user_interest_btn" onclick="postRequest(event)" id="div_user_interest_{{ forloop.counter }}" >
+                    <span class="user_interest_span" id="user_interest_{{ forloop.counter }}"
+                    style="background-color: #f53b3b; color: rgb(0, 0, 0);"
+                    >{{ each_interest_obj.interest }}</span>
+                </button>
+              {% endif %}
             {% endfor %}
-        </div>
+          </div>
         {% else %}
-        <div>
+          <div>
             {% for each_interest_obj in all_interests %}
-                <div id="div_user_interest_{{forloop.counter}}">
-                    <span onclick="postRequest(event)"
-                        id="user_interest_{{forloop.counter}}"
-                        style="width: 100px; height: 40px; background-color: rgb(245, 59, 59); color: rgb(0, 0, 0); border: 1px solid black; border-radius: 5px;">
-                        {{each_interest_obj.interest}}
-                    </span>
-                </div>
+              <div id="div_user_interest_{{ forloop.counter }}">
+                <span onclick="postRequest(event)" id="user_interest_{{ forloop.counter }}" style="width: 100px; height: 40px; background-color: rgb(245, 59, 59); color: rgb(0, 0, 0); border: 1px solid black; border-radius: 5px;">{{ each_interest_obj.interest }}</span>
+              </div>
             {% endfor %}
-        </div>
+          </div>
         {% endif %}
         {% for recommended_course in recommended_courses %}
-            <div class="course-div">
-                <div>
-                    <img style="max-width: 100%; width: 100px; height: 100px;" src="{% static 'course_image/' %}{{recommended_course.file_name}}" alt="{{recommended_course.file_name}} pic">
-                </div>
-                <div>
-                    {{recommended_course.course_name}}
-                </div>
-                <div>
-                    <a href="{{recommended_course.course_link}}" target="_blank">Course {{forloop.counter}} Link</a>
-                </div>
+          <div class="course-div">
+            <div>
+              <img style="max-width: 100%; width: 100px; height: 100px;" src="{% static 'course_image/' %}{{ recommended_course.file_name }}" alt="{{ recommended_course.file_name }} pic" />
             </div>
+            <div>{{ recommended_course.course_name }}</div>
+            <div>
+              <a href="{{ recommended_course.course_link }}" target="_blank">Course {{ forloop.counter }} Link</a>
+            </div>
+          </div>
         {% endfor %}
-    </main>
+      </main>
     {% else %}
-    <div>
-        No course tags filters yet
-    </div>
+      <div>No course tags filters yet</div>
     {% endif %}
-</body>
-<script>
+
+    <footer>
+      <p>&copy; 2024 Safari User Portal. All rights reserved.</p>
+    </footer>
+  </body>
+  <script>
     const csrfTokenCookieValue = document.cookie
-        .split("; ")
-        .find((row) => row.startsWith("csrftoken="))
-        ?.split("=")[1];
-
+      .split('; ')
+      .find((row) => row.startsWith('csrftoken='))
+      ?.split('=')[1]
+    
     const deleteRequest = (event) => {
-        // get the i element, then extract it's id
-        const iElement = event.currentTarget;
-        const iElementId = iElement.id;
-        // use this id to get the div(parenet element), and span(sibling)
-        const spanElement = document.querySelector(`#user_interest_${iElementId}`);
-        // remove the iElement from the divElement
-        const removedIElement = iElement.parentNode.removeChild(iElement);
-        // add the background color and color to the span element
-        spanElement.style.backgroundColor = "#f53b3b";
-        spanElement.style.color = "#000";
-
-        const interestValue = spanElement.textContent;
-        const deleteInterest = async () => {
-            try {
-                const DELETEURL = "http://127.0.0.1:8000/safari_learning/deleteinterest/{{logged_in_user.id}}/";
-                const response = await fetch(DELETEURL, {
-                    method: "DELETE",
-                    headers: {
-                        'X-CSRFToken': csrfTokenCookieValue,
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ "interest": interestValue }),
-                });
-                if (!response.ok) {
-                    const data = await response.json();
-                    throw new Error(data.message);
-                }
-                const data = await response.json();
-                console.log(data);
-            } catch (error) {
-                window.location.href = error.message;
-            }
+      // get the i element, then extract it's id
+      const iElement = event.currentTarget
+      const iElementId = iElement.id
+      // use this id to get the div(parenet element), and span(sibling)
+      const spanElement = document.querySelector(`#user_interest_${iElementId}`)
+      // remove the iElement from the divElement
+      const removedIElement = iElement.parentNode.removeChild(iElement)
+      // add the background color and color to the span element
+      spanElement.style.backgroundColor = '#f53b3b'
+      spanElement.style.color = '#000'
+    
+      const interestValue = spanElement.textContent
+      const deleteInterest = async () => {
+        try {
+          const DELETEURL = 'http://127.0.0.1:8000/safari_learning/deleteinterest/{{logged_in_user.id}}/'
+          const response = await fetch(DELETEURL, {
+            method: 'DELETE',
+            headers: {
+              'X-CSRFToken': csrfTokenCookieValue,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ interest: interestValue })
+          })
+          if (!response.ok) {
+            const data = await response.json()
+            throw new Error(data.message)
+          }
+          const data = await response.json()
+          console.log(data)
+        } catch (error) {
+          window.location.href = error.message
         }
-        deleteInterest();
+      }
+      deleteInterest()
     }
-
+    
     const postRequest = (event) => {
-        const domElement = event.currentTarget
-        // when you change the color to greeen color variant already
-        if (domElement.style.backgroundColor === "rgb(108, 245, 108)") {
-            console.log("quitting function early!!!");
-            return;
+      const domElement = event.currentTarget
+      // when you change the color to greeen color variant already
+      if (domElement.style.backgroundColor === 'rgb(108, 245, 108)') {
+        console.log('quitting function early!!!')
+        return
+      }
+      // change the background color
+      domElement.style.backgroundColor = '#6cf56c'
+      domElement.style.color = '#fff'
+    
+      // now get the span id
+      const domElementId = domElement.id.split('_')[2]
+      // now get the div that this spam element is in
+      const domElementDiv = document.querySelector(`#div_user_interest_${domElementId}`)
+      // now create the i element put the necessary class, id, and onclick attribute
+      const iElement = document.createElement('i')
+      iElement.className = 'fa-solid fa-circle-xmark'
+      iElement.id = domElementId
+      iElement.style.fontSize = '25px'
+      iElement.setAttribute('onclick', 'deleteRequest(event)')
+      domElementDiv.appendChild(iElement)
+    
+      const interestValue = domElement.textContent.trim()
+      const postInterest = async () => {
+        try {
+          const POSTURL = 'http://127.0.0.1:8000/safari_learning/clickedinterest/{{logged_in_user.id}}/'
+          const response = await fetch(POSTURL, {
+            method: 'POST',
+            headers: {
+              'X-CSRFToken': csrfTokenCookieValue,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ interest: interestValue })
+          })
+          if (!response.ok) {
+            const data = await response.json()
+            throw new Error(data.message)
+          }
+          const data = await response.json()
+          console.log(data)
+        } catch (error) {
+          window.location.href = error.message
         }
-        // change the background color
-        domElement.style.backgroundColor = "#6cf56c";
-        domElement.style.color = "#fff";
-
-        // now get the span id 
-        const domElementId = domElement.id.split("_")[2];
-        // now get the div that this spam element is in
-        const domElementDiv = document.querySelector(`#div_user_interest_${domElementId}`);
-        // now create the i element put the necessary class, id, and onclick attribute
-        const iElement = document.createElement("i");
-        iElement.className = "fa-solid fa-circle-xmark"
-        iElement.id = domElementId;
-        iElement.style.fontSize = "25px";
-        iElement.setAttribute('onclick', 'deleteRequest(event)');
-        domElementDiv.appendChild(iElement);
-
-        const interestValue = domElement.textContent.trim();
-        const postInterest = async () => {
-            try {
-                const POSTURL = "http://127.0.0.1:8000/safari_learning/clickedinterest/{{logged_in_user.id}}/";
-                const response = await fetch(POSTURL, {
-                    method: "POST",
-                    headers: {
-                        'X-CSRFToken': csrfTokenCookieValue,
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ "interest": interestValue }),
-                });
-                if (!response.ok) {
-                    const data = await response.json();
-                    throw new Error(data.message);
-                }
-                const data = await response.json();
-                console.log(data);
-            } catch (error) {
-                window.location.href = error.message;
-            }
-        }
-        postInterest();
+      }
+      postInterest()
     }
-</script>
-
+  </script>
 </html>

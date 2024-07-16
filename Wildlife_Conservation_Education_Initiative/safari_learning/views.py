@@ -31,7 +31,7 @@ def safari_user_signup(request):
                 login(request, safari_user)
                 # TODO redirect user to view name
                 print("sending user to homepage")
-                return redirect("safari:homepage")
+                return redirect("safari:landing_page")
 
             # if not send user to signup again since authenticate returned none
             context_variable["safari_signup_form"] = SafariUserCreationForm()
@@ -79,6 +79,7 @@ def safari_user_homepage(request):
         # TODO also take the necessary data for that page
         # TODO image url, links, based on the profession of the users
         safari_user = request.user
+        print(safari_user.profession)
         safari_courses = SafariCourse.objects.filter(
             profession_json__profession__icontains=safari_user.profession,
         ).all()
@@ -102,9 +103,11 @@ def safari_user_interests(request, user_id):
             user_interests = request.user.interests
             if user_interests:
                 user_interests = user_interests.get("interests", [])
-            
+            else:
+                user_interests = []
             all_interests = Interest.objects.all()
             all_courses = SafariCourse.objects.all()
+            print(all_courses) 
             recommended_courses = [recommended_course for recommended_course in all_courses if set(user_interests).intersection(recommended_course.course_tags.get("course_tags"))]
             context_variable["recommended_courses"] = recommended_courses
             context_variable["user_interests"] = user_interests

@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Event Booking</title>
+    <link rel="stylesheet" href="{% static 'styles/event.css' %}">
 </head>
 <body>
     <main>
         {% if error_msg %}
-            <p>{{error_msg}}</p>
+            <p class="message error">{{error_msg}}</p>
         {% endif %}
         {% if success_msg %}
-            <p>{{success_msg}}</p>
+            <p class="message success">{{success_msg}}</p>
         {% endif %}
-        <form action="" method="post">
+        <form action="" method="post" class="cointer">
             {% csrf_token %}
             <p>
                 {{safari_form.username.label_tag}}
@@ -36,7 +38,7 @@
             </p>
         </form>
         <div>
-            <a href="{% url 'safari:landing_page' %}">Landing Page</a>
+            <a href="{% url 'safari:landing_page' %}">Go back</a>
         </div>
     </main>
 </body>

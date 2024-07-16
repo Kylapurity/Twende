@@ -1,0 +1,77 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url(https://images.unsplash.com/photo-1547970810-dc1eac37d174?q=80&w=2136&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+    background-repeat: no-repeat;
+    background-position: center;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+main {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+}
+.message {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+.message.success {
+    color: #228B22; 
+}
+.message.error {
+    color:#8B0000;
+}
+.cointer {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    /* background-color: #f9f9f9; */
+}
+
+/* .cointer p {
+    margin-bottom: 15px;
+} */
+.cointer label {
+    display: flex;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.cointer select,
+.cointer input[type="text"],
+.cointer input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+.cointer button[type="submit"] {
+    display: flex;
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #8B4513;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.cointer button[type="submit"]:hover {
+    background-color: #8B4513;
+}
+a {
+    color: #FFD700;
+    text-decoration: none;
+    display: block;
+    margin-top: 20px;
+}
