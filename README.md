@@ -1,4 +1,4 @@
-![Python](https://img.shields.io/badge/Python-48.3%25-brightgreen.svg) ![Django](https://img.shields.io/badge/Django-48.3%25-brightgreen.svg) ![JavaScript](https://img.shields.io/badge/JavaScript-3.3%25-lightgrey.svg) ![pip](https://img.shields.io/badge/pip-43.1%25-brightgreen.svg) ![contributors](https://img.shields.io/badge/contributors-2-orange.svg)
+![Python](https://img.shields.io/badge/Python-51.3%25-brightgreen.svg) ![Django](https://img.shields.io/badge/Django-51.3%25-brightgreen.svg) ![JavaScript](https://img.shields.io/badge/JavaScript-1.1%25-lightgrey.svg) ![pip](https://img.shields.io/badge/pip-0.1%25-brightgreen.svg) ![contributors](https://img.shields.io/badge/contributors-2-orange.svg)
 
 
 # Safari Learning: Wildlife Conservation and Education
