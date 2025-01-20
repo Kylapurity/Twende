@@ -1,4 +1,4 @@
-![Python](https://img.shields.io/badge/Python-51.3%25-brightgreen.svg) ![Django](https://img.shields.io/badge/Django-51.3%25-brightgreen.svg) ![HTML](https://img.shields.io/badge/HTML-36.2%25-brightred.svg) ![CSS](https://img.shields.io/badge/CSS-11.3%25-blue.svg)
+![Python](https://img.shields.io/badge/Python-51.3%25-brightgreen.svg) ![Django](https://img.shields.io/badge/Django-51.3%25-brightgreen.svg) ![HTML](https://img.shields.io/badge/HTML-36.2%25-red.svg) ![CSS](https://img.shields.io/badge/CSS-11.3%25-blue.svg)
  ![JavaScript](https://img.shields.io/badge/JavaScript-1.1%25-lightgrey.svg) ![pip](https://img.shields.io/badge/pip-0.1%25-brightgreen.svg) ![contributors](https://img.shields.io/badge/contributors-2-orange.svg)
 
 
